@@ -24,7 +24,7 @@ That's your first task!. You can create as many tasks as you need. You can mark 
 
 <img width="288" height="476" alt="image" src="https://github.com/user-attachments/assets/3a448586-132d-4660-9823-b95a9ac3b51d" />
 
-Depending on the configuration, the task will either be removed when you close the project, save the project or when immediately when you mark the task as finished. You can read more about that under **Configuration**.
+Depending on the configuration, the task will either be removed when you close the project, save the project or when immediately when you mark the task as finished. You can read more about that under [**Configuration**](#configuration).
 
 Dragging the handle on the outer left of an entry allows you to reorder your tasks.
 
