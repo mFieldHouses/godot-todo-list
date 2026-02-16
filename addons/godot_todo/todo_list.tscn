@@ -1,0 +1,308 @@
+[gd_scene format=3 uid="uid://c004w06n0v6a2"]
+
+[ext_resource type="Script" uid="uid://7qtfhp5aifdv" path="res://addons/godot_todo/todo_list.gd" id="1_ljmml"]
+[ext_resource type="Texture2D" uid="uid://bgt71xek4xbis" path="res://addons/godot_todo/TripleBar.svg" id="2_aufsl"]
+[ext_resource type="Script" uid="uid://b83grry5q8g4s" path="res://addons/godot_todo/todo_item_list.gd" id="2_spgs2"]
+[ext_resource type="Script" uid="uid://dhdimry1ujp8u" path="res://addons/godot_todo/todo_item.gd" id="3_laadc"]
+[ext_resource type="Script" uid="uid://cdosadxm000n2" path="res://addons/godot_todo/todo_category.gd" id="5_ddat2"]
+[ext_resource type="Script" uid="uid://l5r2ufp2742j" path="res://addons/godot_todo/settings_container.gd" id="6_ap82j"]
+
+[node name="Todo list" type="VBoxContainer" unique_id=1303604984]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 1147.0
+offset_bottom = 643.0
+script = ExtResource("1_ljmml")
+
+[node name="toolbar" type="HBoxContainer" parent="." unique_id=1937052642]
+layout_mode = 2
+
+[node name="new_category" type="LineEdit" parent="toolbar" unique_id=1470015572]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "New category..."
+
+[node name="settings" type="Button" parent="toolbar" unique_id=1473464812]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Settings"
+flat = true
+
+[node name="todo_container" type="Control" parent="." unique_id=1511343035]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="background" type="Panel" parent="todo_container" unique_id=1655562386]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="todo_container" unique_id=156553577]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="todo_container/ScrollContainer" unique_id=786337178]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="template_todo" type="HBoxContainer" parent="todo_container/ScrollContainer/MarginContainer" unique_id=949963660]
+visible = false
+layout_mode = 2
+script = ExtResource("3_laadc")
+metadata/is_todo_item = true
+
+[node name="grabber" type="TextureRect" parent="todo_container/ScrollContainer/MarginContainer/template_todo" unique_id=127854689]
+modulate = Color(1, 1, 1, 0.49411765)
+custom_minimum_size = Vector2(20, 17.76)
+layout_mode = 2
+size_flags_vertical = 4
+texture = ExtResource("2_aufsl")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="CheckBox" type="CheckBox" parent="todo_container/ScrollContainer/MarginContainer/template_todo" unique_id=2130834610]
+layout_mode = 2
+action_mode = 0
+
+[node name="LineEdit" type="LineEdit" parent="todo_container/ScrollContainer/MarginContainer/template_todo" unique_id=25225919]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "template item (you're not supposed to see this!)"
+expand_to_text_length = true
+context_menu_enabled = false
+emoji_menu_enabled = false
+flat = true
+caret_blink = true
+
+[node name="context_menu" type="MarginContainer" parent="todo_container/ScrollContainer/MarginContainer/template_todo" unique_id=862664747]
+visible = false
+top_level = true
+layout_mode = 2
+mouse_filter = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="vbox" type="VBoxContainer" parent="todo_container/ScrollContainer/MarginContainer/template_todo/context_menu" unique_id=479717132]
+z_index = 3
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="delete" type="Button" parent="todo_container/ScrollContainer/MarginContainer/template_todo/context_menu/vbox" unique_id=1181521127]
+layout_mode = 2
+text = "Delete"
+
+[node name="template_category" type="FoldableContainer" parent="todo_container/ScrollContainer/MarginContainer" unique_id=2023036387]
+visible = false
+layout_mode = 2
+folded = true
+title = "test"
+script = ExtResource("5_ddat2")
+
+[node name="context_menu" type="MarginContainer" parent="todo_container/ScrollContainer/MarginContainer/template_category" unique_id=729502527]
+visible = false
+top_level = true
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="vbox" type="VBoxContainer" parent="todo_container/ScrollContainer/MarginContainer/template_category/context_menu" unique_id=72179451]
+z_index = 3
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="rename" type="Button" parent="todo_container/ScrollContainer/MarginContainer/template_category/context_menu/vbox" unique_id=2093654817]
+layout_mode = 2
+text = "Rename"
+
+[node name="dissolve" type="Button" parent="todo_container/ScrollContainer/MarginContainer/template_category/context_menu/vbox" unique_id=1668700023]
+layout_mode = 2
+text = "Dissolve"
+
+[node name="delete" type="Button" parent="todo_container/ScrollContainer/MarginContainer/template_category/context_menu/vbox" unique_id=349837475]
+layout_mode = 2
+text = "Delete"
+
+[node name="MarginContainer" type="MarginContainer" parent="todo_container/ScrollContainer/MarginContainer/template_category" unique_id=403676415]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="todo_container/ScrollContainer/MarginContainer/template_category/MarginContainer" unique_id=1048627732]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("2_spgs2")
+metadata/is_in_category = false
+
+[node name="new_task" type="LineEdit" parent="todo_container/ScrollContainer/MarginContainer/template_category/MarginContainer/VBoxContainer" unique_id=857267671]
+layout_mode = 2
+placeholder_text = "New task..."
+keep_editing_on_text_submit = true
+flat = true
+
+[node name="todo_item_list" type="VBoxContainer" parent="todo_container/ScrollContainer/MarginContainer" unique_id=266276357]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+script = ExtResource("2_spgs2")
+metadata/is_root_list = true
+
+[node name="new_task" type="LineEdit" parent="todo_container/ScrollContainer/MarginContainer/todo_item_list" unique_id=710154512]
+layout_mode = 2
+placeholder_text = "New task..."
+keep_editing_on_text_submit = true
+flat = true
+
+[node name="settings_container" type="VBoxContainer" parent="." unique_id=320684031]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("6_ap82j")
+
+[node name="toolbar" type="HBoxContainer" parent="settings_container" unique_id=1663243842]
+layout_mode = 2
+
+[node name="back" type="Button" parent="settings_container/toolbar" unique_id=816023949]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "< Back"
+flat = true
+
+[node name="Control" type="Control" parent="settings_container" unique_id=171156475]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Panel" type="Panel" parent="settings_container/Control" unique_id=1212425971]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="settings_container/Control" unique_id=1235781083]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="settings_container/Control/MarginContainer" unique_id=1205655924]
+layout_mode = 2
+
+[node name="discard_tasks" type="HBoxContainer" parent="settings_container/Control/MarginContainer/VBoxContainer" unique_id=952574545]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="settings_container/Control/MarginContainer/VBoxContainer/discard_tasks" unique_id=352769488]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "When to remove a completed task from the list of tasks."
+mouse_filter = 0
+text = "Discard completed tasks"
+text_overrun_behavior = 1
+
+[node name="OptionButton" type="OptionButton" parent="settings_container/Control/MarginContainer/VBoxContainer/discard_tasks" unique_id=1104043522]
+layout_mode = 2
+size_flags_horizontal = 8
+selected = 2
+item_count = 3
+popup/item_0/text = "When ticked off"
+popup/item_0/id = 0
+popup/item_1/text = "When saving project"
+popup/item_1/id = 1
+popup/item_2/text = "When closing project"
+popup/item_2/id = 2
+
+[node name="discard_completed_tasks" type="Button" parent="settings_container/Control/MarginContainer/VBoxContainer" unique_id=1625179280]
+layout_mode = 2
+text = "Discard completed tasks"
+
+[node name="new_task_field" type="HBoxContainer" parent="settings_container/Control/MarginContainer/VBoxContainer" unique_id=1623154741]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="settings_container/Control/MarginContainer/VBoxContainer/new_task_field" unique_id=537215478]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Where the new task creation field is to be located in each section."
+mouse_filter = 0
+text = "New task field location"
+text_overrun_behavior = 1
+
+[node name="OptionButton" type="OptionButton" parent="settings_container/Control/MarginContainer/VBoxContainer/new_task_field" unique_id=1193183429]
+layout_mode = 2
+size_flags_horizontal = 8
+selected = 0
+item_count = 2
+popup/item_0/text = "Bottom"
+popup/item_0/id = 0
+popup/item_1/text = "Top"
+popup/item_1/id = 1
+
+[node name="auto_delete_empty_tasks" type="HBoxContainer" parent="settings_container/Control/MarginContainer/VBoxContainer" unique_id=1191717735]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="settings_container/Control/MarginContainer/VBoxContainer/auto_delete_empty_tasks" unique_id=1231023752]
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Whether to immediately delete tasks that have empty text."
+mouse_filter = 0
+text = "Auto-delete empty tasks"
+text_overrun_behavior = 1
+
+[node name="CheckBox" type="CheckBox" parent="settings_container/Control/MarginContainer/VBoxContainer/auto_delete_empty_tasks" unique_id=1783423369]
+layout_mode = 2
+button_pressed = true
+
+[node name="options" type="HBoxContainer" parent="settings_container/Control/MarginContainer/VBoxContainer" unique_id=1652977124]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="clear_list" type="Button" parent="settings_container/Control/MarginContainer/VBoxContainer/options" unique_id=1705188253]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+tooltip_text = "Completely clear the todo-list."
+theme_override_colors/font_color = Color(0.99976724, 0.23002592, 0.1746136, 1)
+text = "Clear todo-list"
+
+[node name="revert" type="Button" parent="settings_container/Control/MarginContainer/VBoxContainer/options" unique_id=1729707194]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 10
+tooltip_text = "Revert the todo-list to what it was upon startup. (The list is only internally saved when Godot is closed.)"
+theme_override_colors/font_color = Color(0.99976724, 0.23002592, 0.1746136, 1)
+text = "Revert state"
+
+[connection signal="text_submitted" from="toolbar/new_category" to="." method="_create_new_category"]
+[connection signal="button_down" from="toolbar/settings" to="." method="_toggle_settings" binds= [true]]
+[connection signal="toggled" from="todo_container/ScrollContainer/MarginContainer/template_todo/CheckBox" to="todo_container/ScrollContainer/MarginContainer/template_todo" method="_task_toggled"]
+[connection signal="button_down" from="settings_container/toolbar/back" to="." method="_toggle_settings" binds= [false]]
+[connection signal="button_down" from="settings_container/Control/MarginContainer/VBoxContainer/discard_completed_tasks" to="." method="clear_completed_tasks"]
+[connection signal="button_down" from="settings_container/Control/MarginContainer/VBoxContainer/options/clear_list" to="." method="clear_todo_list"]
