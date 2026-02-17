@@ -8,3 +8,5 @@ icon.svg
 editor_scene.tscn
 .gitattributes
 .editorconfig
+addons/godot_todo/configuration.json
+addons/godot_todo/todo_list.json
