@@ -22,7 +22,7 @@ func _enter_tree() -> void:
 	if !_dir.file_exists("configuration.json"):
 		save_configuration()
 	if !_dir.file_exists("todo_list.json"):
-		FileAccess.open("res://addons/godot_todo/todo_list.json", FileAccess.WRITE)
+		save_todo_list()
 	
 	load_todo_list()
 	load_configuration()
