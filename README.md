@@ -56,4 +56,5 @@ The plugin sports a minimal set of configuration options, which can be found und
 
 ## Planned features
 
+* Implement renaming of categories
 * Per-scene todo list / support for multiple lists
