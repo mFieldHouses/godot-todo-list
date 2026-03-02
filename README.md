@@ -42,8 +42,8 @@ It is possible to link specific script locations to tasks. Doing so is quite sim
 
 <img width="374" height="486" alt="image" src="https://github.com/user-attachments/assets/e662ae97-0403-4476-8c30-a6cfcffd3a92" />
 
+<img width="374" height="486" alt="image" src="https://github.com/user-attachments/assets/f815502c-5346-4db9-b2ac-8989b104f03f" />
 
-<img width="374" height="486" alt="image" src="https://github.com/user-attachments/assets/d1ddb1f5-d682-4802-9a61-5cce83d54955" />
 
 Clicking this button will take you to the configured location in your script.
 
