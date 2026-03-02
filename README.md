@@ -38,7 +38,7 @@ You can now drag tasks into this category using the handles on entries, or creat
 
 ### 3. Script Links
 
-It is possible to link specific script locations to tasks. Doing so is quite simple; make sure the script you want to link to is open, and add `<script:#line_num>` to the task text, where instead of `#line_num` you write the line number you want to refer to. If you've followed these steps correctly, the task should be created like normal, the `<script>` tag removed from the task text, and a script button should now also be visible to the left of your task:
+It is possible to link specific script locations to tasks. Doing so is quite simple; make sure the script you want to link to is being edited in the script tab, and add `<script:#line_num>` to the task text, where instead of `#line_num` you write the line number you want to refer to. If you've followed these steps correctly, the task should be created like normal, the `<script>` tag removed from the task text, and a script button should now also be visible to the left of your task:
 
 <img width="374" height="486" alt="image" src="https://github.com/user-attachments/assets/d1ddb1f5-d682-4802-9a61-5cce83d54955" />
 
