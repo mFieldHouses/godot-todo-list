@@ -63,7 +63,6 @@ func create_new_task(new_task_text : String, target_parent : Control = _todo_vbo
 	regex.compile("<[a-zA-Z]*:[0-9]*>")
 	var _match : RegExMatch = regex.search(new_task_text)
 	if _match != null:
-		print("found a match")
 		var _components : PackedStringArray = new_task_text.split("<script:")
 		var _line_number : int = int(_components[1].split(">")[0])
 		
