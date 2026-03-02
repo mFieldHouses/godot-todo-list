@@ -22,6 +22,8 @@ func _ready() -> void:
 	_template_todo_item.visible = false
 	
 	plugin.scene_saved.connect(_saved.unbind(1))
+	
+	$todo_container/ScrollContainer/MarginContainer/template_todo/open_script.icon = EditorInterface.get_base_control().get_theme_icon("Script", "EditorIcons")
 
 func _saved() -> void:
 	if plugin.config.discard_tasks == 1:
@@ -33,16 +35,16 @@ func clear_completed_tasks() -> void:
 		task.queue_free()
 
 func load_todo_list(list : Dictionary) -> void:
-	for task : String in list.loose:
-		create_new_task(task)
+	for task : Dictionary in list.loose:
+		create_new_task(task.task_text, _todo_vbox_container, task.script_link_path, task.script_link_line)
 	var categories : Array = list.categorised.keys()
 	for category_name : String in categories:
 		var _category_container : FoldableContainer = _create_new_category(category_name)
-		for task : String in list.categorised[category_name]:
-			create_new_task(task, _category_container.get_node("MarginContainer/VBoxContainer"))
+		for task : Dictionary in list.categorised[category_name]:
+			create_new_task(task.task_text, _category_container.get_node("MarginContainer/VBoxContainer"), task.script_link_path, task.script_link_line)
 
 
-func create_new_task(new_task_text : String, target_parent : Control = _todo_vbox_container) -> Control:
+func create_new_task(new_task_text : String, target_parent : Control = _todo_vbox_container, script_link_path : String = "", script_link_line : int = 0) -> Control:
 	if new_task_text == "":
 		return
 	
@@ -50,10 +52,25 @@ func create_new_task(new_task_text : String, target_parent : Control = _todo_vbo
 	_new_task.get_node("LineEdit").text = new_task_text
 	_new_task.name = new_task_text
 	_new_task.visible = true
+	_new_task.script_link_path = script_link_path
+	_new_task.script_link_line = script_link_line
 	target_parent.add_child(_new_task)
 	target_parent.get_node("new_task").text = ""
 	
 	_new_task.get_node("LineEdit").text_changed.connect(_task_changed.bind(_new_task))
+	
+	var regex : RegEx = RegEx.new()
+	regex.compile("<[a-zA-Z]*:[0-9]*>")
+	var _match : RegExMatch = regex.search(new_task_text)
+	if _match != null:
+		print("found a match")
+		var _components : PackedStringArray = new_task_text.split("<script:")
+		var _line_number : int = int(_components[1].split(">")[0])
+		
+		_new_task.script_link_path = EditorInterface.get_script_editor().get_current_script().resource_path
+		_new_task.script_link_line = _line_number
+		
+		_new_task.get_node("LineEdit").text = new_task_text.erase(_match.get_start(), _match.get_end() - _match.get_start())
 	
 	return _new_task
 	

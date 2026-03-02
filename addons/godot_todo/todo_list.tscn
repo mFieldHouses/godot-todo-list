@@ -61,7 +61,6 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
 [node name="template_todo" type="HBoxContainer" parent="todo_container/ScrollContainer/MarginContainer" unique_id=949963660]
-visible = false
 layout_mode = 2
 script = ExtResource("3_laadc")
 metadata/is_todo_item = true
@@ -78,6 +77,11 @@ stretch_mode = 6
 [node name="CheckBox" type="CheckBox" parent="todo_container/ScrollContainer/MarginContainer/template_todo" unique_id=2130834610]
 layout_mode = 2
 action_mode = 0
+
+[node name="open_script" type="Button" parent="todo_container/ScrollContainer/MarginContainer/template_todo" unique_id=1910851665]
+visible = false
+layout_mode = 2
+flat = true
 
 [node name="LineEdit" type="LineEdit" parent="todo_container/ScrollContainer/MarginContainer/template_todo" unique_id=25225919]
 layout_mode = 2
@@ -173,6 +177,7 @@ keep_editing_on_text_submit = true
 flat = true
 
 [node name="settings_container" type="VBoxContainer" parent="." unique_id=320684031]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("6_ap82j")

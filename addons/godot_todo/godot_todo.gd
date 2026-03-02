@@ -63,7 +63,7 @@ func load_configuration() -> void:
 
 func save_todo_list() -> void:
 	var _todo_list : Dictionary = {
-		"categorised": {}, #dictionary of string : list
+		"categorised": {}, #dictionary of String : Array[Dictionary]
 		"loose":[]
 	}
 	
@@ -77,10 +77,19 @@ func save_todo_list() -> void:
 			_todo_list.categorised[child.title] = []
 			for subchild in child.get_node("MarginContainer/VBoxContainer").get_children():
 				if subchild is HBoxContainer and subchild.visible:
-					_todo_list.categorised[child.title].append(subchild.get_node("LineEdit").text)
+					_todo_list.categorised[child.title].append(
+						{
+							"task_text": subchild.get_node("LineEdit").text, 
+							"script_link_path": subchild.script_link_path,
+							"script_link_line": subchild.script_link_line
+						})
 					
 		if child is HBoxContainer:
-			_todo_list.loose.append(child.get_node("LineEdit").text)
+			_todo_list.loose.append({
+							"task_text": child.get_node("LineEdit").text, 
+							"script_link_path": child.script_link_path,
+							"script_link_line": child.script_link_line
+						})
 	
 	var _todo_list_file := FileAccess.open("res://addons/godot_todo/todo_list.json", FileAccess.WRITE)
 	_todo_list_file.store_string(JSON.stringify(_todo_list))

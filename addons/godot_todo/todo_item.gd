@@ -1,6 +1,8 @@
 @tool
 extends HBoxContainer
 
+var script_link_path : String = ""
+var script_link_line : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -11,7 +13,12 @@ func _ready() -> void:
 	
 	$context_menu/vbox/delete.button_down.connect(queue_free)
 	$context_menu.mouse_exited.connect(func(): $context_menu.visible = false)
+	
+	$open_script.button_down.connect(open_linked_script)
 
+
+func open_linked_script() -> void:
+	EditorInterface.edit_script(load(script_link_path), script_link_line)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -19,6 +26,8 @@ func _process(delta: float) -> void:
 		toggle_children_mouse_filters(false)
 	else:
 		toggle_children_mouse_filters(true)
+	
+	$open_script.visible = script_link_path != ""
 
 func _get_drag_data(at_position: Vector2) -> Variant:
 	modulate.a = 0.3
